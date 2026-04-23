@@ -17,3 +17,4 @@ yarn-error.log
 /src/vendor
 /src/node_modules
 /src/.env
+docker/mysql/data
