@@ -1,10 +1,3 @@
-@extends('layouts.app')
-
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/header.css') }}"/>
-@endsection
-
-@section('content')
 <header class="header_time-card">
     <div class="header__inner">
         <img src="{{ asset('storage/images/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECH">
@@ -16,4 +9,3 @@
         <a class="header__link" href="/logout">ログアウト</a>
     </nav>
 </header>
-@endsection
