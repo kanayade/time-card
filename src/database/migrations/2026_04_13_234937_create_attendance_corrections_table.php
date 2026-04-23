@@ -15,8 +15,8 @@ class CreateAttendanceCorrectionsTable extends Migration
     {
         Schema::create('attendance_corrections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('attendance_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('attendance_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->datetime('corrected_start_time')->nullable();
             $table->datetime('corrected_end_time')->nullable();
             $table->string('status');

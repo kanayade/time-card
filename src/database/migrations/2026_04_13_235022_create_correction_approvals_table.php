@@ -15,8 +15,8 @@ class CreateCorrectionApprovalsTable extends Migration
     {
         Schema::create('correction_approvals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('correction_id')->constrained('attendance_corrections');
-            $table->foreignId('admin_id')->constrained('users');
+            $table->foreignId('correction_id')->constrained('attendance_corrections')->onDelete('cascade');
+            $table->foreignId('admin_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

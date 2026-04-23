@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\BreakTimeController;
+use App\Http\Controllers\CorrectionController;
 
 /*
 |--------------------------------------------------------------------------
