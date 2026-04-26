@@ -5,10 +5,6 @@
 <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 @endsection
 
-@section('header')
-    @include('partials.header-user')
-@endsection
-
 @section('content')
 <div class="register-form__content">
     <div class="register-form__heading">

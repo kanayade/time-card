@@ -5,10 +5,6 @@
 <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 @endsection
 
-@section('header')
-    @include('partials.header-user')
-@endsection
-
 @section('content')
 <div class="login-form__content">
     <div class="login-form__heading">

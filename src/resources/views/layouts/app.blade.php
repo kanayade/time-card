@@ -9,7 +9,7 @@
     @yield('css')
 </head>
 <body>
-    @yield('header')
+    @include('partials.header')
     <main>
         @yield('content')
     </main>
