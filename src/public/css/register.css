@@ -67,17 +67,17 @@
     opacity: 0.9;
 }
 
-.register-form__attend {
+.login-form__attend {
     margin-top: 24px;
     text-align: center;
 }
 
-.register-form__attend a {
+.login-form__attend a {
     font-size: 14px;
     color: #0073cc;
     text-decoration: none;
 }
 
-.register-form__attend a:hover {
+.login-form__attend a:hover {
     text-decoration: underline;
 }

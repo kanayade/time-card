@@ -5,6 +5,9 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\BreakTimeController;
 use App\Http\Controllers\CorrectionController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +23,7 @@ use App\Http\Controllers\CorrectionController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/register', [RegisterController::class, 'index']);
+Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/login', [LoginController::class, 'index']);
+Route::post('/login', [LoginController::class, 'store']);
