@@ -1,0 +1,141 @@
+.attendance-page {
+    min-height: calc(100vh - 80px);
+    background: #f0eff2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 15px;
+}
+
+.attendance-card {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.attendance-status {
+    display: inline-block;
+    background: #d9d9d9;
+    color: #666;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 6px 18px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+.attendance-date {
+    font-size: 28px;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.attendance-time {
+    font-size: 72px;
+    font-weight: bold;
+    color: #000;
+    letter-spacing: 3px;
+    margin-bottom: 50px;
+}
+
+.attendance-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.attendance-buttons form {
+    margin: 0;
+}
+
+.btn-black,
+.btn-white {
+    width: 160px;
+    height: 50px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-black {
+    background: #000;
+    color: #fff;
+}
+
+.btn-white {
+    background: #fff;
+    color: #000;
+}
+
+.attendance-message {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* =====================
+   タブレット対応
+===================== */
+@media screen and (max-width: 850px) {
+    .attendance-date {
+        font-size: 24px;
+    }
+
+    .attendance-time {
+        font-size: 60px;
+    }
+
+    .btn-black,
+    .btn-white {
+        width: 140px;
+        height: 48px;
+        font-size: 16px;
+    }
+}
+
+/* =====================
+   スマホ対応
+===================== */
+@media screen and (max-width: 480px) {
+    .attendance-page {
+        padding: 20px 10px;
+    }
+
+    .attendance-status {
+        font-size: 12px;
+        padding: 5px 14px;
+        margin-bottom: 25px;
+    }
+
+    .attendance-date {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .attendance-time {
+        font-size: 48px;
+        margin-bottom: 35px;
+        letter-spacing: 1px;
+    }
+
+    .attendance-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .btn-black,
+    .btn-white {
+        width: 220px;
+        height: 48px;
+        font-size: 16px;
+    }
+
+    .attendance-message {
+        font-size: 20px;
+    }
+}
