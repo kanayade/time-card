@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/login.css') }}"/>
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
+<link rel="stylesheet" href="{{ asset('css/header.css') }}">
+
 @endsection
 
 @section('content')
@@ -9,7 +11,7 @@
     <div class="login-form__heading">
         <h2>管理者ログイン</h2>
     </div>
-    <form class="login-form" action="/login" method="post">
+    <form class="login-form" action="/admin/login" method="post">
         @csrf
         <div class="form__group">
             <div class="form__group-title">

@@ -1,0 +1,47 @@
+body {
+    background: #f0eff2;
+}
+
+.staff-list {
+    width: 900px;
+    margin: 60px auto;
+}
+
+.staff-list__title {
+    font-size: 24px;
+    font-weight: 700;
+    padding-left: 15px;
+    border-left: 6px solid #000;
+    margin-bottom: 50px;
+}
+
+.staff-table {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 8px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.staff-table th {
+    color: #737373;
+    font-size: 14px;
+    padding: 16px;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+.staff-table td {
+    text-align: center;
+    padding: 16px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.staff-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.staff-table a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 700;
+}

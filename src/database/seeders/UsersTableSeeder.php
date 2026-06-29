@@ -51,5 +51,12 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('password')
         ];
         DB::table('users')->insert($param);
+        $param = [
+            'name' => '管理者',
+            'email' => 'admin@coachtech.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin',
+        ];
+        DB::table('users')->insert($param);
     }
 }

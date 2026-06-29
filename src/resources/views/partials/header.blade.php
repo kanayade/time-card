@@ -5,15 +5,18 @@
     @auth
         <nav class="header__nav">
             @if(Auth::user()->role === 'admin')
-                <a href="/admin/attendance/list">勤怠一覧</a>
-                <a href="/admin/staff/list">スタッフ一覧</a>
-                <a href="/admin/request/list">申請一覧</a>
+                <a class="header__link" href="/admin/attendance/list">勤怠一覧</a>
+                <a class="header__link" href="/admin/staff/list">スタッフ一覧</a>
+                <a class="header__link" href="/stamp_correction_request/list">申請一覧</a>
             @else
-                <a href="/attendance">勤怠</a>
-                <a href="/attendance/list">勤怠一覧</a>
-                <a href="/request/list">申請</a>
+                <a class="header__link" href="/attendance">勤怠</a>
+                <a class="header__link" href="/attendance/list">勤怠一覧</a>
+                <a class="header__link" href="/stamp_correction_request/list">申請</a>
             @endif
-            <a href="/logout">ログアウト</a>
+            <form method="post" action="/logout">
+                @csrf
+                <button class="header__link header__logout" type="submit">ログアウト</button>
+            </form>
         </nav>
     @endauth
 </header>

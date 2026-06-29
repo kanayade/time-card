@@ -12,6 +12,10 @@
     align-items: center;
     gap: 22px;
 }
+.header__nav form {
+    display: flex;
+    align-items: center;
+}
 .header__link {
     color: #ffffff;
     text-decoration: none;
@@ -20,6 +24,9 @@
     line-height: 1;
     transition: opacity 0.2s ease;
 }
-.header__link:hover {
-    opacity: 0.7;
+.header__logout {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
