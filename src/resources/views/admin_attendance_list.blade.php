@@ -8,18 +8,12 @@
 @section('content')
 <div class="attendance-list">
     <h1 class="attendance-list__title">
-        2023年6月1日の勤怠
+        {{ date('Y年m月d日', strtotime($date)) }}の勤怠一覧
     </h1>
     <div class="attendance-list__date-nav">
-        <button class="date-nav__button">
-            ← 前日
-        </button>
-        <div class="date-nav__current">
-            📅 2023/06/01
-        </div>
-        <button class="date-nav__button">
-            翌日 →
-        </button>
+        <a href="/admin/attendance/list?date={{ \Carbon\Carbon::parse($date)->subDay()->toDateString() }}" class="date-nav__button">← 前日</a>
+        <div class="date-nav__current">📅 {{ date('Y/m/d', strtotime($date)) }}</div>
+        <a href="/admin/attendance/list?date={{ \Carbon\Carbon::parse($date)->addDay()->toDateString() }}" class="date-nav__button">翌日 →</a>
     </div>
     <table class="attendance-table">
         <thead>
@@ -33,30 +27,18 @@
             </tr>
         </thead>
         <tbody>
+        @foreach($attendances as $attendance)
             <tr>
-                <td>山田 太郎</td>
-                <td>09:00</td>
-                <td>18:00</td>
-                <td>1:00</td>
-                <td>8:00</td>
-                <td><a href="#">詳細</a></td>
+                <td>{{ $attendance->user->name }}</td>
+                <td>{{ $attendance->start_time }}</td>
+                <td>{{ $attendance->end_time }}</td>
+                <td>{{ $attendance->break_time }}</td>
+                <td>{{ $attendance->work_time }}</td>
+                <td>
+                    <a href="/admin/attendance/{{ $attendance->id }}">詳細</a>
+                </td>
             </tr>
-            <tr>
-                <td>西 伶奈</td>
-                <td>09:00</td>
-                <td>18:00</td>
-                <td>1:00</td>
-                <td>8:00</td>
-                <td><a href="#">詳細</a></td>
-            </tr>
-            <tr>
-                <td>増田 一世</td>
-                <td>09:00</td>
-                <td>18:00</td>
-                <td>1:00</td>
-                <td>8:00</td>
-                <td><a href="#">詳細</a></td>
-            </tr>
+        @endforeach
         </tbody>
     </table>
 </div>

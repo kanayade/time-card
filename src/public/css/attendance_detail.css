@@ -67,6 +67,15 @@
     outline: none;
 }
 
+.detail-value input[readonly],
+.detail-value textarea[readonly] {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    outline: none;
+    cursor: default;
+}
+
 .detail-value textarea {
     width: 400px;
     height: 80px;
@@ -92,7 +101,7 @@
 .detail-button {
     display: flex;
     justify-content: flex-end;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 .form__error {
     width:100%;
@@ -111,7 +120,31 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
+.btn-gray {
+    width: 130px;
+    height: 45px;
+    background-color: #7d7d7d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: default;
+    opacity: 1;
+    /* disabledでも薄くしない */
+}
+.btn-gray:disabled {
+    background-color: #7d7d7d;
+    color: #fff;
+    opacity: 1;
+    cursor: default;
+}
+.pending-message {
+    color: #ff4d4d;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: right;
+}
 @media screen and (max-width: 768px) {
 
     .detail-label {

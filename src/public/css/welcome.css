@@ -1,0 +1,81 @@
+.welcome {
+    max-width: 600px;
+    width: 90%;
+    margin: 120px auto;
+    text-align: center;
+}
+
+.welcome__title {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.welcome__text {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 60px;
+}
+
+.welcome__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.welcome__button {
+    display: block;
+    padding: 18px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.welcome__button:hover {
+    opacity: .85;
+}
+
+.welcome__button.admin {
+    background: #555;
+}
+
+/* タブレット */
+@media screen and (max-width: 850px) {
+    .welcome {
+        margin: 80px auto;
+    }
+
+    .welcome__title {
+        font-size: 32px;
+    }
+
+    .welcome__text {
+        font-size: 16px;
+    }
+}
+
+/* スマホ */
+@media screen and (max-width: 480px) {
+    .welcome {
+        width: 92%;
+        margin: 50px auto;
+    }
+
+    .welcome__title {
+        font-size: 26px;
+    }
+
+    .welcome__text {
+        font-size: 15px;
+        margin-bottom: 40px;
+    }
+
+    .welcome__button {
+        font-size: 16px;
+        padding: 15px;
+    }
+}

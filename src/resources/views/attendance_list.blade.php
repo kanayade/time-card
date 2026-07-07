@@ -11,15 +11,9 @@
     <div class="attendance-list-card">
         <h2 class="page-title">勤怠一覧</h2>
         <div class="month-nav">
-            <a href="/attendance/list?month={{ $month->copy()->subMonth()->format('Y-m') }}" class="month-link">
-                ← 前月
-            </a>
-            <div class="month-current">
-                📅 {{ $month->format('Y/m') }}
-            </div>
-            <a href="/attendance/list?month={{ $month->copy()->addMonth()->format('Y-m') }}" class="month-link">
-                翌月 →
-            </a>
+            <a href="/attendance/list?month={{ $month->copy()->subMonth()->format('Y-m') }}" class="month-link">← 前月</a>
+        <div class="month-current">📅 {{ $month->format('Y/m') }}</div>
+            <a href="/attendance/list?month={{ $month->copy()->addMonth()->format('Y-m') }}" class="month-link">翌月 →</a>
         </div>
         <table class="attendance-table">
             <thead>

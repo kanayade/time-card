@@ -10,8 +10,8 @@
     <div class="request-card">
         <h2 class="page-title">申請一覧</h2>
         <div class="request-tabs">
-            <a href="#" class="tab active">承認待ち</a>
-            <a href="#" class="tab">承認済み</a>
+            <a href="/stamp_correction_request/list?status=承認待ち" class="tab {{ $status == '承認待ち' ? 'active' : '' }}">承認待ち</a>
+            <a href="/stamp_correction_request/list?status=承認済み" class="tab {{ $status == '承認済み' ? 'active' : '' }}">承認済み</a>
         </div>
         <table class="request-table">
             <thead>
@@ -25,18 +25,22 @@
                 </tr>
             </thead>
             <tbody>
-                @for ($i = 0; $i < 8; $i++)
+                @foreach ($corrections as $correction)
                 <tr>
-                    <td>承認待ち</td>
-                    <td>西怜奈</td>
-                    <td>2023/06/01</td>
-                    <td>遅延のため</td>
-                    <td>2023/06/02</td>
+                    <td>{{ $correction->status }}</td>
+                    <td>{{ $correction->user->name }}</td>
+                    <td>{{ date('Y/m/d', strtotime($correction->attendance->date)) }}</td>
+                    <td>{{ $correction->reason }}</td>
+                    <td>{{ date('Y/m/d', strtotime($correction->created_at)) }}</td>
                     <td>
-                        <a href="#" class="detail-link">詳細</a>
+                        @if(Auth::user()->role === 'admin')
+                            <a class="detail-link" href="/stamp_correction_request/approve/{{ $correction->id }}">詳細</a>
+                        @else
+                            <a class="detail-link" href="/stamp_correction_request/detail/{{ $correction->id }}">詳細</a>
+                        @endif
                     </td>
                 </tr>
-                @endfor
+                @endforeach
             </tbody>
         </table>
     </div>

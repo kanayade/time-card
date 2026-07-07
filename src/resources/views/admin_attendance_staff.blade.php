@@ -9,18 +9,12 @@
 <div class="staff-attendance">
 
     <h1 class="staff-attendance__title">
-        西伶奈さんの勤怠
+        {{ $staff->name }}さんの勤怠
     </h1>
     <div class="month-nav">
-        <button class="month-nav__button">
-            ← 前月
-        </button>
-        <div class="month-nav__current">
-            📅 2023/06
-        </div>
-        <button class="month-nav__button">
-            翌月 →
-        </button>
+        <a href="/admin/attendance/staff/{{ $staff->id }}?month={{ $month->copy()->subMonth()->format('Y-m') }}">← 前月</a>
+    <div class="month-nav__current">📅 {{ $month->format('Y/m') }}</div>
+        <a href="/admin/attendance/staff/{{ $staff->id }}?month={{ $month->copy()->addMonth()->format('Y-m') }}">翌月 →</a>
     </div>
     <table class="attendance-table">
         <thead>
@@ -34,30 +28,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>06/01(木)</td>
-                <td>09:00</td>
-                <td>18:00</td>
-                <td>1:00</td>
-                <td>8:00</td>
-                <td><a href="#">詳細</a></td>
-            </tr>
-            <tr>
-                <td>06/02(金)</td>
-                <td>09:00</td>
-                <td>18:00</td>
-                <td>1:00</td>
-                <td>8:00</td>
-                <td><a href="#">詳細</a></td>
-            </tr>
-            <tr>
-                <td>06/03(土)</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a href="#">詳細</a></td>
-            </tr>
+            @foreach ($attendances as $attendance)
+                <tr>
+                    <td>{{ $attendance->date_format }}</td>
+                    <td>{{ $attendance->start_time }}</td>
+                    <td>{{ $attendance->end_time }}</td>
+                    <td>{{ $attendance->break_time }}</td>
+                    <td>{{ $attendance->work_time }}</td>
+                    <td><a href="/admin/attendance/{{ $attendance->id }}">詳細</a></td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
     <div class="csv-button-area">

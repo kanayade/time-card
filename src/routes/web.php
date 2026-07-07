@@ -22,9 +22,7 @@ use App\Http\Controllers\AdminAttendanceController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () {return view('welcome');});
 
 // 一般ユーザーの登録
 Route::get('/register', [RegisterController::class, 'index']);
@@ -46,12 +44,30 @@ Route::post('/attendance/done',[AttendanceController::class, 'done']);
 Route::get('/attendance/list', [AttendanceController::class, 'list']);
 // 一般ユーザーの勤怠詳細
 Route::get('/attendance/detail/{id}', [AttendanceController::class, 'detail']);
-Route::get('/stamp_correction_request/list', [AttendanceController::class, 'request']);
+// 一般ユーザーの勤怠修正申請一覧
+Route::get('/stamp_correction_request/list', [CorrectionController::class, 'request']);
+// 一般ユーザーの勤怠修正申請
 Route::post('/attendance/correction/{id}', [CorrectionController::class, 'store']);
-Route::get('/admin/login', [AdminLoginController::class, 'index']);
-Route::post('/admin/login', [AdminLoginController::class, 'store']);
+Route::get(
+    '/stamp_correction_request/detail/{id}',
+    [ApprovalController::class, 'detail']
+);
 
+// 管理者のログイン画面表示
+Route::get('/admin/login', [AdminLoginController::class, 'index']);
+// 管理者のログイン
+Route::post('/admin/login', [AdminLoginController::class, 'store']);
+// 管理者の勤怠一覧
 Route::get('/admin/attendance/list', [AdminAttendanceController::class, 'index']);
+// 管理者のスタッフ一覧
 Route::get('/admin/staff/list', [AdminAttendanceController::class, 'list']);
-Route::get('/admin/attendance/staff/{id}', [AdminAttendanceController::class, 'detail']);
-Route::get('/admin/stamp_correction_request/list', [AdminAttendanceController::class, 'request']);
+// 管理者のスタッフ別勤怠一覧
+Route::get('/admin/attendance/staff/{id}', [AdminAttendanceController::class, 'staff']);
+// 管理者の勤怠詳細
+Route::get('/admin/attendance/{id}', [AdminAttendanceController::class, 'detail']);
+// 管理者の勤怠修正
+Route::put('/admin/attendance/{id}', [AdminAttendanceController::class, 'update']);
+// 管理者の勤怠修正申請詳細
+Route::get('/stamp_correction_request/approve/{id}', [ApprovalController::class, 'detail']);
+// 管理者の勤怠修正申請承認
+Route::post('/stamp_correction_request/approve/{id}', [ApprovalController::class, 'approve']);

@@ -19,11 +19,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>西 伶奈</td>
-                <td>reina.n@coachtech.com</td>
-                <td><a href="#">詳細</a></td>
-            </tr>
+            @foreach($staffs as $staff)
+                <tr>
+                    <td>{{ $staff->name }}</td>
+                    <td>{{ $staff->email }}</td>
+                    <td><a href="/admin/attendance/staff/{{ $staff->id }}">詳細</a></td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>

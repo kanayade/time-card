@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\BreakTime;
+use App\Models\AttendanceCorrection;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -95,9 +96,7 @@ class AttendanceController extends Controller
         $attendance = Attendance::with('user', 'breakTimes')->findOrFail($id);
         $attendance->start = $attendance->start_time ? date('H:i', strtotime($attendance->start_time)) : '';
         $attendance->end = $attendance->end_time ? date('H:i', strtotime($attendance->end_time)) : '';
-
         $breaks = [];
-
         foreach ($attendance->breakTimes as $break) {
             $breaks[] = [
                 'start' => $break->start_time ? date('H:i', strtotime($break->start_time)) : '',
@@ -108,10 +107,10 @@ class AttendanceController extends Controller
             'start' => '',
             'end' => '',
         ];
-        return view('attendance_detail', compact('attendance','breaks'));
-    }
-    public function request()
-    {
-        return view('request_list');
+        // 承認待ちの申請があるか
+        $pending = AttendanceCorrection::where('attendance_id', $id)
+        ->where('status', '承認待ち')
+        ->exists();
+        return view('attendance_detail', compact('attendance','breaks', 'pending'));
     }
 }
