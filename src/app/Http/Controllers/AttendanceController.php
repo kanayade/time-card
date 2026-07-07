@@ -107,7 +107,6 @@ class AttendanceController extends Controller
             'start' => '',
             'end' => '',
         ];
-        // 承認待ちの申請があるか
         $pending = AttendanceCorrection::where('attendance_id', $id)
         ->where('status', '承認待ち')
         ->exists();

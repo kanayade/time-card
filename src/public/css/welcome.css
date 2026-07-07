@@ -43,7 +43,6 @@
     background: #555;
 }
 
-/* タブレット */
 @media screen and (max-width: 850px) {
     .welcome {
         margin: 80px auto;
@@ -58,7 +57,6 @@
     }
 }
 
-/* スマホ */
 @media screen and (max-width: 480px) {
     .welcome {
         width: 92%;

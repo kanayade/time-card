@@ -13,18 +13,17 @@ class AdminLoginController extends Controller
     }
     public function store(LoginRequest $request)
     {
-        if (Auth::attempt($request->only('email', 'password'))) {
-            if (Auth::user()->role !== 'admin') {
-                Auth::logout();
-                return back()->withErrors([
-                    'email' => '管理者アカウントではありません',
-                ]);
-            }
+        if (Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password,
+            'role' => 'admin',
+        ])
+        ) {
             $request->session()->regenerate();
             return redirect('/admin/attendance/list');
         }
         return back()->withErrors([
-            'email' => 'ログイン情報が登録されていません',
+        'email' => 'ログイン情報が登録されていません',
         ]);
     }
 }

@@ -20,15 +20,12 @@ class AdminAttendanceController extends Controller
         ->whereDate('date', $date)
         ->get();
     foreach ($attendances as $attendance) {
-        // 出勤
         $attendance->start_time = $attendance->start_time
             ? Carbon::parse($attendance->start_time)->format('H:i')
             : '';
-        // 退勤
         $attendance->end_time = $attendance->end_time
             ? Carbon::parse($attendance->end_time)->format('H:i')
             : '';
-        // 休憩時間
         $breakMinutes = 0;
         foreach ($attendance->breakTimes as $break) {
             if ($break->start_time && $break->end_time) {
@@ -41,7 +38,6 @@ class AdminAttendanceController extends Controller
             floor($breakMinutes / 60),
             $breakMinutes % 60
         );
-        // 勤務時間
         if ($attendance->start_time && $attendance->end_time) {
             $workMinutes = Carbon::parse($attendance->end_time)
                 ->diffInMinutes(Carbon::parse($attendance->start_time));
@@ -78,7 +74,6 @@ class AdminAttendanceController extends Controller
             'start' => '',
             'end' => '',
         ];
-        // 承認待ちの申請があるか
         $pending = AttendanceCorrection::where('attendance_id', $id)
         ->where('status', '承認待ち')
         ->exists();
@@ -101,7 +96,6 @@ class AdminAttendanceController extends Controller
             BreakTime::where('attendance_id', $attendance->id)->delete();
         foreach ($validated['break_start'] as $index => $start) {
             $end = $validated['break_end'][$index];
-            // 空欄（追加用）は保存しない
             if (empty($start) && empty($end)) {
                 continue;
             }
@@ -154,5 +148,75 @@ class AdminAttendanceController extends Controller
             }
         }
         return view('admin_attendance_staff', compact('staff', 'attendances', 'month'));
+    }
+    public function export(Request $request, $id)
+    {
+        $staff = User::findOrFail($id);
+        $month = $request->month
+        ? Carbon::parse($request->month)
+        : now();
+        $attendances = Attendance::with('breakTimes')
+            ->where('user_id', $id)
+            ->whereYear('date', $month->year)
+            ->whereMonth('date', $month->month)
+            ->orderBy('date')
+            ->get();
+        $callback = function () use ($attendances) {
+            $file = fopen('php://output', 'w');
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, [
+                '日付',
+                '出勤',
+                '退勤',
+                '休憩時間',
+                '勤務時間'
+            ]);
+            foreach ($attendances as $attendance) {
+                $breakMinutes = 0;
+                foreach ($attendance->breakTimes as $break) {
+                    if ($break->start_time && $break->end_time) {
+                        $breakMinutes += Carbon::parse($break->end_time)
+                            ->diffInMinutes(Carbon::parse($break->start_time));
+                    }
+                }
+                $breakTime = sprintf(
+                    '%d:%02d',
+                    floor($breakMinutes / 60),
+                    $breakMinutes % 60
+                );
+                $workTime = '';
+                if ($attendance->start_time && $attendance->end_time) {
+                    $workMinutes =
+                        Carbon::parse($attendance->end_time)
+                        ->diffInMinutes(Carbon::parse($attendance->start_time))
+                        - $breakMinutes;
+                    $workTime = sprintf(
+                        '%d:%02d',
+                        floor($workMinutes / 60),
+                        $workMinutes % 60
+                    );
+                }
+                fputcsv($file, [
+                    Carbon::parse($attendance->date)->format('Y/m/d'),
+                    $attendance->start_time
+                        ? Carbon::parse($attendance->start_time)->format('H:i')
+                        : '',
+                    $attendance->end_time
+                        ? Carbon::parse($attendance->end_time)->format('H:i')
+                        : '',
+                    $breakTime,
+                    $workTime,
+                ]);
+            }
+            fclose($file);
+        };
+        $filename = $staff->name . '_' . $month->format('Y_m') . '_attendance.csv';
+        return response()->streamDownload(
+            $callback,
+            $filename,
+            [
+                'Content-Type' => 'text/csv',
+            ]
+        );
     }
 }

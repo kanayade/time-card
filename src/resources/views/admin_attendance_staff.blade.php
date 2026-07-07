@@ -41,9 +41,7 @@
         </tbody>
     </table>
     <div class="csv-button-area">
-        <button class="csv-button">
-            CSV出力
-        </button>
+            <a href="/admin/attendance/staff/{{ $staff->id }}/export?month={{ $month->format('Y-m') }}" class="csv-button">CSV出力</a>
     </div>
 </div>
 @endsection

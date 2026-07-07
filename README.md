@@ -68,7 +68,7 @@ DB_PORT=3306
 
 以下のユーザーでログインして動作確認できます。
 ### 一般ユーザー
-- メールアドレス：
+- メールアドレス：user@coachtech.com
 - パスワード：password
 ### 管理者
 - メールアドレス：admin@coachtech.com
@@ -76,7 +76,7 @@ DB_PORT=3306
 
 ## 使用技術（実行環境）
 ・PHP 8.2<br>
-・Laravel 10.x<br>
+・Laravel 8.75<br>
 ・MySQL 8.0<br>
 ・Docker / Docker Compose<br>
 

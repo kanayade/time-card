@@ -24,7 +24,6 @@ class CorrectionController extends Controller
         ]);
         foreach ($validated['break_start'] as $index => $start) {
             $end = $validated['break_end'][$index];
-            // 空欄（追加用）は保存しない
             if (empty($start) && empty($end)) {
                 continue;
             }
@@ -42,11 +41,9 @@ class CorrectionController extends Controller
         $status = $request->status ?? '承認待ち';
         $query = AttendanceCorrection::with('attendance', 'user')
         ->where('status', $status);
-        // 一般ユーザーなら自分の申請だけ
         if (Auth::user()->role === 'user') {
             $query->where('user_id', Auth::id());
         }
-        // 管理者なら全件取得（条件を追加しない）
         $corrections = $query->orderBy('created_at', 'desc')->get();
         return view('request_list', compact('corrections', 'status'));
     }

@@ -16,9 +16,23 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $param = [
+            'name' => '一般ユーザー',
+            'email' => 'user@coachtech.com',
+            'password' => Hash::make('password'),
+            'role' => 'user',
+        ];
+        DB::table('users')->insert($param);
+            $param = [
+            'name' => '管理者',
+            'email' => 'admin@coachtech.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin',
+        ];
+        DB::table('users')->insert($param);
+        $param = [
             'name' => '西 伶奈',
             'email' => 'reina.n@coachtech.com',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
         ];
         DB::table('users')->insert($param);
         $param = [
@@ -50,13 +64,5 @@ class UsersTableSeeder extends Seeder
             'email' => 'norio.n@coachtech.com',
             'password' => Hash::make('password')
         ];
-        DB::table('users')->insert($param);
-        $param = [
-            'name' => '管理者',
-            'email' => 'admin@coachtech.com',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
-        ];
-        DB::table('users')->insert($param);
     }
 }
