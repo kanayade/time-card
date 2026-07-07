@@ -64,5 +64,6 @@ class UsersTableSeeder extends Seeder
             'email' => 'norio.n@coachtech.com',
             'password' => Hash::make('password')
         ];
+        DB::table('users')->insert($param);
     }
 }
