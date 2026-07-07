@@ -1,6 +1,6 @@
 <header class="header_time-card">
     <div class="header__inner">
-        <a href="/" class="header__logo"><img src="{{ asset('storage/images/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECH">
+        <a href="/" class="header__logo"><img src="{{ asset('images/COACHTECHヘッダーロゴ.png') }}" alt="COACHTECH">
         </a>
     </div>
     @auth
