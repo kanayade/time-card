@@ -45,28 +45,23 @@ class UpdateRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            // 出勤・退勤
             if ($this->start_time >= $this->end_time) {
                 $validator->errors()->add(
                     'start_time',
                     '出勤時間もしくは退勤時間が不適切な値です'
                 );
             }
-            //  休憩時間
             foreach ($this->break_start as $index => $start) {
                 $end = $this->break_end[$index] ?? null;
-                // 空行（追加用）はチェックしない
                 if (empty($start) && empty($end)) {
                     continue;
                 }
-                // 休憩開始が勤務時間外
                 if ($start < $this->start_time || $start > $this->end_time) {
                     $validator->errors()->add(
                         "break_start.$index",
                         '休憩時間が不適切な値です'
                     );
                 }
-                // 休憩終了が退勤後
                 if ($end && $end > $this->end_time) {
                     $validator->errors()->add(
                         "break_end.$index",
