@@ -51,7 +51,7 @@ Route::get('/admin/staff/list', [AdminAttendanceController::class, 'list']);
 Route::get('/admin/attendance/staff/{id}', [AdminAttendanceController::class, 'staff']);
 Route::get('/admin/attendance/staff/{id}/export', [AdminAttendanceController::class, 'export']);
 Route::get('/admin/attendance/{id}', [AdminAttendanceController::class, 'detail']);
-Route::put('/admin/attendance/{id}', [AdminAttendanceController::class, 'update']);
+Route::post('/admin/attendance/update/{id}', [AdminAttendanceController::class, 'update']);
 Route::get('/stamp_correction_request/approve/{id}', [ApprovalController::class, 'detail']);
 Route::post('/stamp_correction_request/approve/{id}', [ApprovalController::class, 'approve']);
 });

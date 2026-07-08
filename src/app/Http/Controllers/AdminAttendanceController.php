@@ -81,6 +81,7 @@ class AdminAttendanceController extends Controller
             'attendance' => $attendance,
             'breaks' => $breaks,
             'isAdmin' => true,
+            'pending' => $pending,
         ]);
     }
     public function update(UpdateRequest $request,$id)

@@ -11,6 +11,8 @@
             <form action="
                 @if(isset($isApproval))
                 /stamp_correction_request/approve/{{ $correction->id }}
+                @elseif($isAdmin ?? false)
+                /admin/attendance/update/{{ $attendance->id }}
                 @else
                 /attendance/correction/{{ $attendance->id }}
                 @endif

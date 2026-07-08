@@ -30,7 +30,6 @@ class AttendanceController extends Controller
             'user_id' => Auth::id(),
             'date' => today(),
             'start_time' => now(),
-            'status' => 'working',
         ]);
         return redirect('/attendance');
     }
